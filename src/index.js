@@ -13,6 +13,7 @@ function createHeader(){
     const header = document.createElement('header');
     const logoImg = document.createElement('img');
     logoImg.src = logo;
+    logoImg.classList.add('logo');
     header.appendChild(logoImg);
 
     for (let i = 0; i < 3; i++){
