@@ -5,12 +5,26 @@ import manEatingBurger from './man_eating_burger.jpeg';
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
+
 const fakeLinks = [];
+createHeader(fakeLinks);
+const menuFakeLink = fakeLinks[0];
+const contactFakeLink = fakeLinks[1];
+const aboutFakeLink = fakeLinks[2];
 
-createHeader();
-loadAbout(fakeLinks[2], fakeLinks);
+loadAbout(aboutFakeLink, fakeLinks);
 
-function createHeader(){
+aboutFakeLink.addEventListener('click', () => {
+    clearContent();
+    loadAbout(aboutFakeLink, fakeLinks);
+});
+
+contactFakeLink.addEventListener('click', ()=>{
+    clearContent(); //this not working for some reason
+    loadAbout(contactFakeLink, fakeLinks);
+});
+
+function createHeader(fakeLinks){
     const header = document.createElement('header');
     const logoImg = document.createElement('img');
     logoImg.src = logo;
@@ -39,11 +53,8 @@ function createHeader(){
     body.prepend(header);
 }
 
-function loadAbout(aboutFakeLink, fakeLinks) {
-    fakeLinks.map((fakeLink => {
-        fakeLink.classList.remove('selected');
-    }));
-    aboutFakeLink.classList.add('selected');
+function loadAbout(aboutLink, fakeLinks) {
+    reassignSelectedFakeLink(aboutLink, fakeLinks);
 
     const heading1 = document.createElement('h1');
     heading1.textContent = "About us";
@@ -56,9 +67,31 @@ function loadAbout(aboutFakeLink, fakeLinks) {
     heading2.textContent = "Dedication to you";
     content.append(heading2);
     const para = document.createElement('p');
-    para.textContent = "BcBonalds, where we redefine fast food with imaginative flavors, a quirky atmosphere, and a mission to make dining fun and unforgettable! Join us for a delightful experience that leaves you smiling with every bite.";
+    para.textContent = "We redefine fast food with imaginative flavors and a quirky atmosphere all for our mission to make dining fun and unforgettable! Join us at BcBonalds for a delightful experience that leaves you smiling with every bite.";
     content.append(para);
 }
+
+function loadContact(contactLink, fakeLinks){
+    reassignSelectedFakeLink(contactLink, fakeLinks);
+
+    const heading1 = document.createElement('h1');
+    heading1.textContent = "Reach us at";
+    content.append(heading1);
+}
+
+
+
+function reassignSelectedFakeLink(fakeLink, fakeLinks){
+    fakeLinks.map((fakeLink => {
+        fakeLink.classList.remove('selected');
+    }));
+    fakeLink.classList.add('selected');
+}
+
+function clearContent(){
+    content.textContent = "";
+}
+
 
 /* make this here now lol
     <header>
