@@ -78,3 +78,8 @@ button#order {
     object-fit:cover;
     margin-bottom: 20px;
 }
+
+#content .menu-holder {
+    width: 100%;
+    background-color: purple;
+}

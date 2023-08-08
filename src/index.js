@@ -15,13 +15,18 @@ const aboutFakeLink = fakeLinks[2];
 loadAbout(aboutFakeLink, fakeLinks);
 
 aboutFakeLink.addEventListener('click', () => {
-    clearContent();
+    clearContent(content);
     loadAbout(aboutFakeLink, fakeLinks);
 });
 
 contactFakeLink.addEventListener('click', ()=>{
-    clearContent(); //this not working for some reason
-    loadAbout(contactFakeLink, fakeLinks);
+    clearContent(content); //this not working for some reason
+    loadContact(contactFakeLink, fakeLinks);
+});
+
+menuFakeLink.addEventListener('click', () => {
+    clearContent(content);
+    loadMenu(menuFakeLink, fakeLinks);
 });
 
 function createHeader(fakeLinks){
@@ -74,9 +79,28 @@ function loadAbout(aboutLink, fakeLinks) {
 function loadContact(contactLink, fakeLinks){
     reassignSelectedFakeLink(contactLink, fakeLinks);
 
+
     const heading1 = document.createElement('h1');
-    heading1.textContent = "Reach us at";
+    heading1.textContent = "Need to Contact us?";
     content.append(heading1);
+    const heading2 = document.createElement('h2');
+    heading2.textContent = "Reach us at:";
+    content.append(heading2);
+    const para = document.createElement('p');
+    para.textContent = "bcbonaldsisgreat@bcbonalds.com \n 843-420-6969";
+    content.append(para);
+}
+
+function loadMenu(menuLink, fakeLinks){
+    reassignSelectedFakeLink(menuLink, fakeLinks);
+
+    const heading1 = document.createElement('h1');
+    heading1.textContent = "Our food:";
+    content.append(heading1);
+
+    const menuHolder = document.createElement('div');
+    menuHolder.classList.add('menu-holder');
+    content.append(menuHolder);
 }
 
 
@@ -88,7 +112,7 @@ function reassignSelectedFakeLink(fakeLink, fakeLinks){
     fakeLink.classList.add('selected');
 }
 
-function clearContent(){
+function clearContent(content){
     content.textContent = "";
 }
 
