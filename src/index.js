@@ -87,7 +87,9 @@ function loadContact(contactLink, fakeLinks){
     heading2.textContent = "Reach us at:";
     content.append(heading2);
     const para = document.createElement('p');
-    para.textContent = "bcbonaldsisgreat@bcbonalds.com \n 843-420-6969";
+    para.append(document.createTextNode('bcbonaldsisgreat@bcbonalds.com'))
+    para.append(document.createElement('br'));
+    para.append(document.createTextNode('669-420-6969'));
     content.append(para);
 }
 
@@ -96,6 +98,7 @@ function loadMenu(menuLink, fakeLinks){
 
     const heading1 = document.createElement('h1');
     heading1.textContent = "Our food";
+    heading1.classList.add('menu-title');
     content.append(heading1);
 
     const menuHolder = document.createElement('div');
