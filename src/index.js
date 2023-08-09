@@ -1,6 +1,7 @@
 import './style.css';
 
-import {logo, manEatingBurger} from './image_mod/image_barrel';
+import {logo, manEatingBurger} from './image_mod/image_barrel.js';
+import {make} from './jeffQuery.js'
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
@@ -87,6 +88,9 @@ function loadContact(contactLink, fakeLinks){
     para.append(document.createElement('br'));
     para.append(document.createTextNode('669-420-6969'));
     content.append(para);
+
+    const p = make('p', content);
+    p.textContent = 'hi';
 }
 
 function loadMenu(menuLink, fakeLinks){
@@ -94,7 +98,6 @@ function loadMenu(menuLink, fakeLinks){
 
     const heading1 = document.createElement('h1');
     heading1.textContent = "Our food";
-    heading1.classList.add('menu-title');
     content.append(heading1);
 
     const menuHolder = document.createElement('div');
