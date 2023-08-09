@@ -18,7 +18,7 @@ function make(selector, parent){
         const sym = selector.at(lastInd);
         if (sym === '.'){
             classes.unshift(subStr);
-        } else if (id === null) {
+        } else if (id === undefined) {
             id = subStr;
         } else {
             throw console.error("Argument error: elements can't have multiple ids");

@@ -13,47 +13,42 @@ const contactFakeLink = fakeLinks[1];
 const aboutFakeLink = fakeLinks[2];
 
 loadAbout(aboutFakeLink, fakeLinks);
+let lastContext = 'about';
+content.classList.add(lastContext);
 
 aboutFakeLink.addEventListener('click', () => {
+    changeContentContext('about');
     clearContent(content);
     loadAbout(aboutFakeLink, fakeLinks);
 });
 
 contactFakeLink.addEventListener('click', ()=>{
+    changeContentContext('contact');
     clearContent(content); //this not working for some reason
     loadContact(contactFakeLink, fakeLinks);
 });
 
 menuFakeLink.addEventListener('click', () => {
+    changeContentContext('menu');
     clearContent(content);
     loadMenu(menuFakeLink, fakeLinks);
 });
 
 function createHeader(fakeLinks){
-    const header = document.createElement('header');
-    const logoImg = document.createElement('img');
+    const header = make('header');
+    const logoImg = make('img.logo', header);
     logoImg.src = logo;
     logoImg.alt = 'logo';
-    logoImg.classList.add('logo');
-    header.append(logoImg);
 
-    for (let i = 0; i < 3; i++){
-        const newButton = document.createElement('button');
-        newButton.classList.add('fake-link');
-        header.append(newButton);
-        fakeLinks[i] = newButton;
-    }
-    fakeLinks[0].setAttribute('id', 'menu');
+    fakeLinks[0] = make('button.fake-link#menu', header);
     fakeLinks[0].textContent = 'Menu';
-    fakeLinks[1].setAttribute('id', 'contact');
+    fakeLinks[1] = make('button.fake-link#contact', header);
     fakeLinks[1].textContent = 'Contact';
-    fakeLinks[2].setAttribute('id', 'about');
+    fakeLinks[2] = make('button.fake-link#about', header);
     fakeLinks[2].textContent = 'About';
 
-    const orderButton = document.createElement('button');
-    orderButton.setAttribute('id', 'order');
+    const orderButton = make('button#order', header);
     orderButton.textContent = 'Order now';
-    header.append(orderButton);
 
     body.prepend(header);
 }
@@ -61,13 +56,11 @@ function createHeader(fakeLinks){
 function loadAbout(aboutLink, fakeLinks) {
     reassignSelectedFakeLink(aboutLink, fakeLinks);
 
-    const heading1 = document.createElement('h1');
+    const heading1 = make('h1', content);
     heading1.textContent = "About us";
-    content.append(heading1);
-    const img = document.createElement('img');
+    const img = make('img', content);
     img.src = manEatingBurger;
     img.alt = "man enjoying bcbonalds burger";
-    content.append(img);
     const heading2 = document.createElement('h2');
     heading2.textContent = "Dedication to you";
     content.append(heading2);
@@ -89,33 +82,59 @@ function loadContact(contactLink, fakeLinks){
     para.append(document.createTextNode('669-420-6969'));
     content.append(para);
 
-    const p = make('p', content);
-    p.textContent = 'hi';
 }
 
 function loadMenu(menuLink, fakeLinks){
     reassignSelectedFakeLink(menuLink, fakeLinks);
 
-    const heading1 = document.createElement('h1');
+    const featured = make('div.sidebar.featured', content);;
+    const featTab = make('div.sidetab', featured);
+    const featImg = make('img', featTab);
+    featImg.src = 'https://s7d1.scene7.com/is/image/mcdonalds/desserts_shakes_300x300:category-panel-left-desktop' ;
+    featImg.alt = 'featured image';
+    const featName = make('p', featTab);
+    featName.textContent = 'Featured';
+    
+    const sidebar = make('div.sidebar', content);
+    
+    const tab = make('div.sidetab.selected', sidebar);
+    const tabImg = make('img', tab);
+    tabImg.src = 'https://s7d1.scene7.com/is/image/mcdonalds/burgers_300x300:category-panel-left-desktop';
+    tab.alt = 'tab picture';
+    const tabName = make('p', tab);
+    tabName.textContent = "Burgers";
+
+    for (let i = 0; i < 5; i++){
+        const tab = make('div.sidetab', sidebar);
+        const tabImg = make('img', tab);
+        tabImg.src = 'https://s7d1.scene7.com/is/image/mcdonalds/burgers_300x300:category-panel-left-desktop';
+        tab.alt = 'tab picture';
+        const tabName = make('p', tab);
+        tabName.textContent = "Burgers";
+
+    }
+
+    const menuHolder = make('div.menu-holder', content);
+    const heading1 = make('h1', menuHolder);
     heading1.textContent = "Our food";
-    content.append(heading1);
-
-    const menuHolder = document.createElement('div');
-    menuHolder.classList.add('menu-holder');
-    content.append(menuHolder);
-
     for (let i = 0; i < 8; i++){
-        const entryArticle = makeEntry('BcBurger', 'https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop');
+        const entryArticle = makeEntry('BcBurger', 'https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop', true);
         menuHolder.append(entryArticle);
     }
+
 }
 
-function makeEntry(name, img){
+function makeEntry(name, img, isLimited){
     const entryArticle = document.createElement('article');
     const entryImg = document.createElement('img');
     entryImg.src = img;
     entryImg.alt = 'entry image for ' + name;
     entryArticle.append(entryImg);
+
+    if (isLimited) {
+        const limitedP = make('p.limited', entryArticle);
+        limitedP.textContent = 'Limited Time Only'
+    }
     const entryName = document.createElement('p');
     entryName.textContent = name;
     entryArticle.append(entryName);
@@ -136,24 +155,9 @@ function clearContent(content){
     content.textContent = "";
 }
 
+function changeContentContext(context){
+    content.classList.remove(lastContext);
+    content.classList.add(context);
+    lastContext = context;
+}
 
-/* make this here now lol
-    <header>
-        <img class="logo" src="bcbonalds.jpg" alt="logo">
-        <button class="fake-link" id="menu">Menu</button>
-        <button class="fake-link" id="contact">Contact</button>
-        <button class="fake-link selected" id="About">About</button>
-        <button id="order">Order</button>
-    </header>
-
-    <div id="content">
-        <h1>About us</h1>
-        <img src="man_eating_burger.jpeg" alt="man enjoying bcbonalds burger">
-        <h2>Dedication to you</h2>
-        <p>
-            BcBonalds, where we redefine fast food with imaginative flavors, a quirky atmosphere,
-            and a mission to make dining fun and unforgettable! Join us for a delightful experience that
-            leaves you smiling with every bite.
-        </p>
-    </div>
-*/
