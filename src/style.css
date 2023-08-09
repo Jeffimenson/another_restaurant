@@ -81,5 +81,27 @@ button#order {
 
 #content .menu-holder {
     width: 100%;
-    background-color: purple;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 300px;
+
+    gap: 80px;
+}
+
+#content .menu-holder article {
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#content .menu-holder article img {
+    width: 100%;
+    height: 80%;
+    margin-bottom: 0px;    
+    object-fit: contain;
+}
+#content .menu-holder article p {
+    flex: 1;
 }

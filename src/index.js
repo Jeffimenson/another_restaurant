@@ -95,12 +95,30 @@ function loadMenu(menuLink, fakeLinks){
     reassignSelectedFakeLink(menuLink, fakeLinks);
 
     const heading1 = document.createElement('h1');
-    heading1.textContent = "Our food:";
+    heading1.textContent = "Our food";
     content.append(heading1);
 
     const menuHolder = document.createElement('div');
     menuHolder.classList.add('menu-holder');
     content.append(menuHolder);
+
+    for (let i = 0; i < 8; i++){
+        const entryArticle = makeEntry('BcBurger®', 'https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop');
+        menuHolder.append(entryArticle);
+    }
+}
+
+function makeEntry(name, img){
+    const entryArticle = document.createElement('article');
+    const entryImg = document.createElement('img');
+    entryImg.src = img;
+    entryImg.alt = 'entry image for ' + name;
+    entryArticle.append(entryImg);
+    const entryName = document.createElement('p');
+    entryName.textContent = name;
+    entryArticle.append(entryName);
+
+    return entryArticle;
 }
 
 
