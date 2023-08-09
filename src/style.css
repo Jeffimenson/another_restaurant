@@ -24,7 +24,7 @@ button:active, input:active {
 
 img.logo {
     display: block;
-    width: 5em;
+    height: 100%;
 }
 
 header {
@@ -36,7 +36,7 @@ header {
     align-items: center;
     gap: 4em;
     box-shadow: 0 0 2px 2px gainsboro;
-    height: 100px;
+    height: 80px;
 }
 
 header > .fake-link {
