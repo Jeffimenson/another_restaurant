@@ -1,7 +1,6 @@
 import './style.css';
 
-import logo from './bcbonalds.jpg';
-import manEatingBurger from './man_eating_burger.jpeg';
+import {logo, manEatingBurger} from './image_mod/image_barrel';
 
 const body = document.querySelector('body');
 const content = document.querySelector('#content');
@@ -80,9 +79,6 @@ function loadContact(contactLink, fakeLinks){
     reassignSelectedFakeLink(contactLink, fakeLinks);
 
 
-    const heading1 = document.createElement('h1');
-    heading1.textContent = "Need to Contact us?";
-    content.append(heading1);
     const heading2 = document.createElement('h2');
     heading2.textContent = "Reach us at:";
     content.append(heading2);
@@ -106,7 +102,7 @@ function loadMenu(menuLink, fakeLinks){
     content.append(menuHolder);
 
     for (let i = 0; i < 8; i++){
-        const entryArticle = makeEntry('BcBurger®', 'https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop');
+        const entryArticle = makeEntry('BcBurger', 'https://s7d1.scene7.com/is/image/mcdonalds/DC_201907_0005_BigMac_832x472:1-4-product-tile-desktop');
         menuHolder.append(entryArticle);
     }
 }
