@@ -7,6 +7,15 @@ html {
     font-family: Helvetica, sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+body > #content {
+    flex: 1;
+}
+
 button, input {
     background-color: inherit;
     border: none;
@@ -80,18 +89,6 @@ button#order {
     margin-bottom: 20px;
 }
 
-#content .menu-holder {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    grid-auto-rows: 200px;
-
-    grid-column-start: 2;
-    gap: 60px;
-}
-
 #content h1{
     text-align: center;
 }
@@ -99,7 +96,7 @@ button#order {
 #content.menu {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 80px;
+    grid-template-rows: 80px 1fr;
 }
 
 #content.menu .sidebar {
@@ -138,6 +135,19 @@ button#order {
     object-fit: contain;
 }
 
+.menu-holder {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: 200px;
+
+    grid-column-start: 2;
+    grid-row: 1 / -1;
+    gap: 60px;
+}
+
 .menu-holder article {
 
     display: flex;
@@ -170,4 +180,46 @@ button#order {
 .menu-holder h1 {
     text-align: center;
     grid-column: 1 / -1;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 90px;
+    padding: 0 25%;
+    padding-bottom: 60px;
+}
+
+footer .row:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
+    border-bottom: 2px gainsboro solid;
+    width: 100%;
+}
+
+footer .row:nth-child(2) {
+    width: 100%;
+    justify-content: left;
+    display: flex;
+    gap: 40px;
+}
+
+footer .row li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+
+
+footer .row li:first-of-type {
+    font-weight: bold;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
 }

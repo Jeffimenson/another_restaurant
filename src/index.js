@@ -8,6 +8,7 @@ const content = document.querySelector('#content');
 
 const fakeLinks = [];
 createHeader(fakeLinks);
+createFooter();
 const menuFakeLink = fakeLinks[0];
 const contactFakeLink = fakeLinks[1];
 const aboutFakeLink = fakeLinks[2];
@@ -15,6 +16,7 @@ const aboutFakeLink = fakeLinks[2];
 loadAbout(aboutFakeLink, fakeLinks);
 let lastContext = 'about';
 content.classList.add(lastContext);
+
 
 aboutFakeLink.addEventListener('click', () => {
     changeContentContext('about');
@@ -53,6 +55,29 @@ function createHeader(fakeLinks){
     body.prepend(header);
 }
 
+function createFooter(){
+    const footer = make('footer', body);
+    
+    const row1 = make('div.row', footer);
+    for (let i = 0; i < 4; i++){
+        const listCol = make('div.list-col', row1);
+        const list = make('ul', listCol);
+        for (let j = 0; j < 3 + i; j++) {
+            const li = make('li', listCol);
+            const a = make('a', li);
+            a.textContent = 'Stuff stuff';
+            a.href = '#';
+        }
+    }
+
+    const row2 = make('div.row', footer);
+    for (let i = 0; i < 5; i++){
+        const dummyLink = make('a', row2);
+        dummyLink.textContent = "More stuff";
+        dummyLink.href = "#";
+    } 
+}
+
 function loadAbout(aboutLink, fakeLinks) {
     reassignSelectedFakeLink(aboutLink, fakeLinks);
 
@@ -72,7 +97,6 @@ function loadAbout(aboutLink, fakeLinks) {
 function loadContact(contactLink, fakeLinks){
     reassignSelectedFakeLink(contactLink, fakeLinks);
 
-
     const heading2 = document.createElement('h2');
     heading2.textContent = "Reach us at:";
     content.append(heading2);
@@ -81,7 +105,6 @@ function loadContact(contactLink, fakeLinks){
     para.append(document.createElement('br'));
     para.append(document.createTextNode('669-420-6969'));
     content.append(para);
-
 }
 
 function loadMenu(menuLink, fakeLinks){
