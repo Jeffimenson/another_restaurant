@@ -69,6 +69,7 @@ button#order {
 
 #content {
     width: 100%;
+    min-height: 900px;
     box-sizing: border-box;
     padding: 80px 25%;
     display: flex;
